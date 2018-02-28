@@ -28,7 +28,7 @@ var fixtureData = {
 
 var bitcoind = require('../').services.Bitcoin({
   node: {
-    datadir: process.env.HOME + '/.zen',
+    datadir: process.env.HOME + '/.snowgem',
     network: {
       name: 'testnet'
     }

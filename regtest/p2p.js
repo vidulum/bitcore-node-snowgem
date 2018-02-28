@@ -10,7 +10,7 @@ var p2p = require('bitcore-p2p');
 var Peer = p2p.Peer;
 var Messages = p2p.Messages;
 var chai = require('chai');
-var bitcore = require('bitcore-lib-zen');
+var bitcore = require('bitcore-lib-snowgem');
 var Transaction = bitcore.Transaction;
 var BN = bitcore.crypto.BN;
 var async = require('async');
@@ -52,7 +52,7 @@ describe('P2P Functionality', function() {
       bitcoind = require('../').services.Bitcoin({
         spawn: {
           datadir: datadir,
-          exec: path.resolve(__dirname, '../bin/zend')
+          exec: path.resolve(__dirname, '../bin/snowgemd')
         },
         node: {
           network: bitcore.Networks.testnet
