@@ -1,11 +1,11 @@
 {
-  "name": "bitcore-node-snowgem",
+  "name": "bitcore-node-vidulum",
   "description": "Full node with extended capabilities using Bitcore and Zcash",
   "author": "BitPay <dev@bitpay.com>",
   "version": "3.1.2",
   "main": "./index.js",
-  "repository": "git://github.com/snowgem/bitcore-node-snowgem.git",
-  "homepage": "https://github.com/snowgem/bitcore-node-snowgem",
+  "repository": "git://github.com/vidulum/bitcore-node-vidulum.git",
+  "homepage": "https://github.com/vidulum/bitcore-node-vidulum",
   "bugs": {
     "url": "https://github.com/bitpay/bitcore-node/issues"
   },
@@ -41,13 +41,13 @@
     "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "tags": [
-    "snowgem",
-    "snowgemd"
+    "vidulum",
+    "vidulumd"
   ],
   "dependencies": {
     "async": "^1.3.0",
     "bitcoind-rpc": "^0.6.0",
-    "bitcore-lib-snowgem": "snowgem/bitcore-lib-snowgem",
+    "bitcore-lib-vidulum": "vidulum/bitcore-lib-vidulum",
     "body-parser": "^1.13.3",
     "colors": "^1.1.2",
     "commander": "^2.8.1",

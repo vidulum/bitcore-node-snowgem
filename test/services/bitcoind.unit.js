@@ -6,7 +6,7 @@ var path = require('path');
 var EventEmitter = require('events').EventEmitter;
 var should = require('chai').should();
 var crypto = require('crypto');
-var bitcore = require('bitcore-lib-snowgem');
+var bitcore = require('bitcore-lib-vidulum');
 var _ = bitcore.deps._;
 var sinon = require('sinon');
 var proxyquire = require('proxyquire');
@@ -18,13 +18,13 @@ var log = index.log;
 var errors = index.errors;
 
 var Transaction = bitcore.Transaction;
-var readFileSync = sinon.stub().returns(fs.readFileSync(path.resolve(__dirname, '../data/snowgem.conf')));
+var readFileSync = sinon.stub().returns(fs.readFileSync(path.resolve(__dirname, '../data/vidulum.conf')));
 var BitcoinService = proxyquire('../../lib/services/bitcoind', {
   fs: {
     readFileSync: readFileSync
   }
 });
-var defaultBitcoinConf = fs.readFileSync(path.resolve(__dirname, '../data/default.snowgem.conf'), 'utf8');
+var defaultBitcoinConf = fs.readFileSync(path.resolve(__dirname, '../data/default.vidulum.conf'), 'utf8');
 
 describe('Bitcoin Service', function() {
   var txhex = '01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff0704ffff001d0104ffffffff0100f2052a0100000043410496b538e853519c726a2c91e61ec11600ae1390813a627c66fb8be7947be63c52da7589379515d4e0a604f8141781e62294721166bf621e73a82cbf2342c858eeac00000000';
@@ -357,7 +357,7 @@ describe('Bitcoin Service', function() {
     afterEach(function() {
       sandbox.restore();
     });
-    it('will parse a snowgem.conf file', function() {
+    it('will parse a vidulum.conf file', function() {
       var TestBitcoin = proxyquire('../../lib/services/bitcoind', {
         fs: {
           readFileSync: readFileSync,
@@ -369,7 +369,7 @@ describe('Bitcoin Service', function() {
         }
       });
       var bitcoind = new TestBitcoin(baseConfig);
-      bitcoind.options.spawn.datadir = '/tmp/.snowgem';
+      bitcoind.options.spawn.datadir = '/tmp/.vidulum';
       var node = {};
       bitcoind._loadSpawnConfiguration(node);
       should.exist(bitcoind.spawn.config);
@@ -466,7 +466,7 @@ describe('Bitcoin Service', function() {
         }
       };
       var bitcoind = new TestBitcoin(config);
-      bitcoind.options.spawn.datadir = '/tmp/.snowgem';
+      bitcoind.options.spawn.datadir = '/tmp/.vidulum';
       var node = {};
       bitcoind._loadSpawnConfiguration(node);
     });
@@ -480,7 +480,7 @@ describe('Bitcoin Service', function() {
     afterEach(function() {
       sandbox.restore();
     });
-    it('should warn the user if reindex is set to 1 in the snowgem.conf file', function() {
+    it('should warn the user if reindex is set to 1 in the vidulum.conf file', function() {
       var bitcoind = new BitcoinService(baseConfig);
       var config = {
         txindex: 1,
@@ -829,7 +829,7 @@ describe('Bitcoin Service', function() {
         }
       };
       var bitcoind = new BitcoinService(config);
-      bitcoind._getNetworkConfigPath().should.equal('testnet3/snowgem.conf');
+      bitcoind._getNetworkConfigPath().should.equal('testnet3/vidulum.conf');
     });
     it('will get default rpc port for regtest', function() {
       bitcore.Networks.enableRegtest();
@@ -843,7 +843,7 @@ describe('Bitcoin Service', function() {
         }
       };
       var bitcoind = new BitcoinService(config);
-      bitcoind._getNetworkConfigPath().should.equal('regtest/snowgem.conf');
+      bitcoind._getNetworkConfigPath().should.equal('regtest/vidulum.conf');
     });
   });
 
@@ -1749,7 +1749,7 @@ describe('Bitcoin Service', function() {
       bitcoind._loadSpawnConfiguration = sinon.stub();
       bitcoind.spawn = {};
       bitcoind.spawn.exec = 'testexec';
-      bitcoind.spawn.configPath = 'testdir/snowgem.conf';
+      bitcoind.spawn.configPath = 'testdir/vidulum.conf';
       bitcoind.spawn.datadir = 'testdir';
       bitcoind.spawn.config = {};
       bitcoind.spawn.config.rpcport = 20001;
@@ -1766,7 +1766,7 @@ describe('Bitcoin Service', function() {
         spawn.callCount.should.equal(1);
         spawn.args[0][0].should.equal('testexec');
         spawn.args[0][1].should.deep.equal([
-          '--conf=testdir/snowgem.conf',
+          '--conf=testdir/vidulum.conf',
           '--datadir=testdir',
           '--testnet'
         ]);
@@ -1800,7 +1800,7 @@ describe('Bitcoin Service', function() {
       bitcoind.spawn = {};
       bitcoind.spawn.exec = 'bitcoind';
       bitcoind.spawn.datadir = '/tmp/bitcoin';
-      bitcoind.spawn.configPath = '/tmp/bitcoin/snowgem.conf';
+      bitcoind.spawn.configPath = '/tmp/bitcoin/vidulum.conf';
       bitcoind.spawn.config = {};
       bitcoind.spawnRestartTime = 1;
       bitcoind._loadTipFromNode = sinon.stub().callsArg(1);
@@ -1838,7 +1838,7 @@ describe('Bitcoin Service', function() {
       bitcoind.spawn = {};
       bitcoind.spawn.exec = 'bitcoind';
       bitcoind.spawn.datadir = '/tmp/bitcoin';
-      bitcoind.spawn.configPath = '/tmp/bitcoin/snowgem.conf';
+      bitcoind.spawn.configPath = '/tmp/bitcoin/vidulum.conf';
       bitcoind.spawn.config = {};
       bitcoind.spawnRestartTime = 1;
       bitcoind._loadTipFromNode = sinon.stub().callsArg(1);
@@ -1885,7 +1885,7 @@ describe('Bitcoin Service', function() {
       bitcoind.spawn = {};
       bitcoind.spawn.exec = 'bitcoind';
       bitcoind.spawn.datadir = '/tmp/bitcoin';
-      bitcoind.spawn.configPath = '/tmp/bitcoin/snowgem.conf';
+      bitcoind.spawn.configPath = '/tmp/bitcoin/vidulum.conf';
       bitcoind.spawn.config = {};
       bitcoind.spawnRestartTime = 1;
       bitcoind._loadTipFromNode = sinon.stub().callsArg(1);
@@ -1924,7 +1924,7 @@ describe('Bitcoin Service', function() {
       bitcoind._loadSpawnConfiguration = sinon.stub();
       bitcoind.spawn = {};
       bitcoind.spawn.exec = 'testexec';
-      bitcoind.spawn.configPath = 'testdir/snowgem.conf';
+      bitcoind.spawn.configPath = 'testdir/vidulum.conf';
       bitcoind.spawn.datadir = 'testdir';
       bitcoind.spawn.config = {};
       bitcoind.spawn.config.rpcport = 20001;
@@ -1954,7 +1954,7 @@ describe('Bitcoin Service', function() {
       bitcoind._loadSpawnConfiguration = sinon.stub();
       bitcoind.spawn = {};
       bitcoind.spawn.exec = 'testexec';
-      bitcoind.spawn.configPath = 'testdir/snowgem.conf';
+      bitcoind.spawn.configPath = 'testdir/vidulum.conf';
       bitcoind.spawn.datadir = 'testdir';
       bitcoind.spawn.config = {};
       bitcoind.spawn.config.rpcport = 20001;
