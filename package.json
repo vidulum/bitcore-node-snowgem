@@ -7,7 +7,7 @@
   "repository": "git://github.com/snowgem/bitcore-node-snowgem.git",
   "homepage": "https://github.com/snowgem/bitcore-node-snowgem",
   "bugs": {
-    "url": "https://github.com/bitpay/bitcore-node/issues"
+    "url": "https://github.com/snowgem/bitcore-node-snowgem/issues"
   },
   "contributors": [
     {
